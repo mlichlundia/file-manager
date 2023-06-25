@@ -23,5 +23,6 @@ export const commands = {
   zip: {
     compress: 'compress path_to_file path_to_destination',
     decompress: 'decompress path_to_file path_to_destination'
-  }
+  },
+  exit: '.exit'
 }
