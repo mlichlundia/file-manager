@@ -11,9 +11,8 @@ greetings()
 
 rl.on('line', (command) => {
   if(command === commands.exit) {
-    farewell()
     rl.close();
-
+    farewell()
     return
   }
 
@@ -22,4 +21,5 @@ rl.on('line', (command) => {
 
 process.on('SIGINT', () => {
   farewell()
+  process.exit();
 })
