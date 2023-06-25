@@ -1,5 +1,8 @@
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 export function getCurrentPath(url) {
-  return path.dirname(url)
+  const fileName = fileURLToPath(url);
+
+  return path.dirname(fileName)
 }
