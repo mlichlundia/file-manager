@@ -1,0 +1,1 @@
+export const PROMPT_MESSAGE = 'What is next?\n'
