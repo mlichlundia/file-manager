@@ -13,9 +13,13 @@ rl.on('line', (command) => {
   if(command === commands.exit) {
     farewell()
     rl.close();
-    
+
     return
   }
 
   console.log(command)
+})
+
+process.on('SIGINT', () => {
+  farewell()
 })
