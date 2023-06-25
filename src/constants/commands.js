@@ -5,12 +5,12 @@ export const commands = {
     ls: 'ls'
   },
   fs: {
-    read: 'cat path_to_file',
-    create: 'add new_file_name',
-    rename: 'rn path_to_file new_filename',
-    copy: 'cp path_to_file path_to_new_directory',
-    move: 'mv path_to_file path_to_new_directory',
-    delete: 'rm path_to_file'
+    read: 'cat',
+    create: 'add',
+    rename: 'rn',
+    copy: 'cp',
+    move: 'mv',
+    delete: 'rm'
   },
   os: {
     eol: 'os --EOL',

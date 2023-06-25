@@ -5,7 +5,8 @@ import { greetings } from './utils/base/greetings.js';
 import { farewell } from './utils/base/farewell.js';
 import { getCurrentPath } from './utils/base/getCurrentPath.js';
 import { logHomeDir } from './utils/base/logHomeDir.js';
-import { PROMPT_MESSAGE } from './constants/base.js';
+import { INVALID_INPUT, PROMPT_MESSAGE } from './constants/base.js';
+import { read } from './utils/fs/read.js';
 
 const rl = readline.createInterface(process.stdin, process.stdout)
 
@@ -15,14 +16,15 @@ logHomeDir()
 rl.setPrompt(PROMPT_MESSAGE)
 rl.prompt()
 
-rl.on('line', (command) => {
+rl.on('line', async(command) => {
   if(command === commands.exit) {
     rl.close();
     farewell()
     return
   }
 
-  execCommand('my command')
+  await execCommand(command.trim())
+  showPromt()
 })
 
 rl.on('SIGINT', () => {
@@ -30,9 +32,17 @@ rl.on('SIGINT', () => {
   process.exit();
 })
 
-function execCommand(command) {
-  console.log(`\nYou are currently in ${getCurrentPath(import.meta.url)}`)
-  console.log(command)
-  rl.setPrompt(PROMPT_MESSAGE)
+async function execCommand(command) {
+  const params = command.split(' ').slice(1, )
+
+  if(command.startsWith(commands.fs.read)) {
+    await read(getCurrentPath(import.meta.url), params[0])
+  } else {
+    console.error(INVALID_INPUT)
+  }
+}
+
+function showPromt() {
+  console.log(`\nYou are currently in ${getCurrentPath(import.meta.url)}\n`)
   rl.prompt()
 }
