@@ -7,6 +7,7 @@ import { getCurrentPath } from './utils/base/getCurrentPath.js';
 import { logHomeDir } from './utils/base/logHomeDir.js';
 import { INVALID_INPUT, PROMPT_MESSAGE } from './constants/base.js';
 import { read } from './utils/fs/read.js';
+import { create } from './utils/fs/create.js';
 
 const rl = readline.createInterface(process.stdin, process.stdout)
 
@@ -37,6 +38,8 @@ async function execCommand(command) {
 
   if(command.startsWith(commands.fs.read)) {
     await read(getCurrentPath(import.meta.url), params[0])
+  } else if(command.startsWith(commands.fs.create)) {
+    await create(getCurrentPath(import.meta.url), params[0])
   } else {
     console.error(INVALID_INPUT)
   }
