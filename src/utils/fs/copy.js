@@ -2,9 +2,10 @@ import { resolve } from 'path';
 import { INVALID_INPUT, OPERATION_FAILD } from '../../constants/base.js';
 import { createReadStream, createWriteStream } from 'node:fs';
 import { isFile } from '../base/isFile.js';
+import { getFileName } from '../base/getFileName.js';
 
 const createFileCopyName = (file) => {
-    const fileNameArr = file.slice(file.indexOf('/') + 1 || 0, ).split('.')
+    const fileNameArr = getFileName(file).split('.')
     const fileCopy = '/' + fileNameArr[0] + '_copy' + '.' +  fileNameArr[1]
 
     return fileCopy
@@ -19,7 +20,7 @@ const copy = async (currentDir, file, target) => {
     const path = resolve(currentDir, file)
     const targetPath = resolve(currentDir, target)
 
-    if(!isFile(path)) {
+    if(!await isFile(path)) {
         return
     }
 
