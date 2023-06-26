@@ -10,6 +10,7 @@ import { read } from './utils/fs/read.js';
 import { create } from './utils/fs/create.js';
 import { rename } from './utils/fs/rename.js';
 import { copy } from './utils/fs/copy.js';
+import { move } from './utils/fs/move.js';
 
 const rl = readline.createInterface(process.stdin, process.stdout)
 
@@ -46,6 +47,8 @@ async function execCommand(command) {
     await rename(getCurrentPath(import.meta.url), params[0], params[1])
   } else if(command.startsWith(commands.fs.copy)) {
     await copy(getCurrentPath(import.meta.url), params[0], params[1])
+  } else if(command.startsWith(commands.fs.move)) {
+    await move(getCurrentPath(import.meta.url), params[0], params[1])
   } else {
     console.error(INVALID_INPUT)
   }
