@@ -16,6 +16,7 @@ import { getEOL } from './utils/os/eol.js';
 import { getCpusInfo } from './utils/os/cpus.js';
 import { getSystemUsername } from './utils/os/systemUsername.js';
 import { getOSArch } from './utils/os/arch.js';
+import { calculateHash } from './utils/hash/hash.js';
 
 const rl = readline.createInterface(process.stdin, process.stdout)
 
@@ -66,6 +67,8 @@ async function execCommand(command) {
     await getSystemUsername()
   } else if(command === commands.os.architecture) {
     await getOSArch()
+  } else if(command.startsWith(commands.hash)) {
+    await calculateHash(getCurrentPath(import.meta.url), params[0])
   } else {
     console.error(INVALID_INPUT)
   }
