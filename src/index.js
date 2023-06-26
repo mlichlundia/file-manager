@@ -13,6 +13,7 @@ import { copy } from './utils/fs/copy.js';
 import { move } from './utils/fs/move.js';
 import { remove } from './utils/fs/delete.js';
 import { getEOL } from './utils/os/eol.js';
+import { getCpusInfo } from './utils/os/cpus.js';
 
 const rl = readline.createInterface(process.stdin, process.stdout)
 
@@ -55,6 +56,8 @@ async function execCommand(command) {
     await remove(getCurrentPath(import.meta.url), params[0])
   } else if(command === commands.os.eol) {
     await getEOL()
+  } else if(command === commands.os.cpus) {
+    await getCpusInfo()
   } else {
     console.error(INVALID_INPUT)
   }
