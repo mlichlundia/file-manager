@@ -1,10 +1,10 @@
 import { resolve } from 'path';
 import { createReadStream } from 'node:fs';
-import { OPERATION_FAILD } from '../../constants/base.js';
+import { INVALID_INPUT, OPERATION_FAILD } from '../../constants/base.js';
 
 const read = async (currentDir, file) => {
     if(!currentDir || !file) {
-        console.error(OPERATION_FAILD)
+        console.error(INVALID_INPUT)
         return
     }
 

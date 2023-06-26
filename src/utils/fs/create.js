@@ -1,10 +1,10 @@
 import { resolve } from 'path';
 import { appendFile } from 'node:fs/promises';
-import { OPERATION_FAILD } from '../../constants/base.js';
+import { INVALID_INPUT, OPERATION_FAILD } from '../../constants/base.js';
 
 const create = async (currentDir, file) => {
     if(!currentDir || !file) {
-        console.error(OPERATION_FAILD)
+        console.error(INVALID_INPUT)
         return
     }
 
