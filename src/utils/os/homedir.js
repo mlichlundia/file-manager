@@ -1,8 +1,5 @@
-import path from 'path';
+import { getHomedir } from '../base/getHomedir.js';
 
 export async function logHomeDir() {
-  const systemDrive = process.env.SystemDrive;
-  const username = process.env.USERNAME;
-
-  console.log(path.join(systemDrive, 'Users', username))
+  console.log(getHomedir())
 };

@@ -22,12 +22,13 @@ import { decompress } from './utils/zip/decompress.js';
 import { goUp } from './utils/navigation/up.js';
 import { goToPath } from './utils/navigation/cd.js';
 import { listDir } from './utils/navigation/ls.js';
+import { getHomedir } from './utils/base/getHomedir.js';
 
 const rl = readline.createInterface(process.stdin, process.stdout)
 
 getUsername()
 greetings()
-logHomeDir()
+goToPath(cwd(), getHomedir())
 rl.setPrompt(PROMPT_MESSAGE)
 rl.prompt()
 
