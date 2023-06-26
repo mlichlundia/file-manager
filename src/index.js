@@ -18,6 +18,7 @@ import { getSystemUsername } from './utils/os/systemUsername.js';
 import { getOSArch } from './utils/os/arch.js';
 import { calculateHash } from './utils/hash/hash.js';
 import { compress } from './utils/zip/compress.js';
+import { decompress } from './utils/zip/decompress.js';
 
 const rl = readline.createInterface(process.stdin, process.stdout)
 
@@ -72,6 +73,8 @@ async function execCommand(command) {
     await calculateHash(getCurrentPath(import.meta.url), params[0])
   } else if(command.startsWith(commands.zip.compress)) {
     await compress(getCurrentPath(import.meta.url), params[0], params[1])
+  } else if(command.startsWith(commands.zip.decompress)) {
+    await decompress(getCurrentPath(import.meta.url), params[0], params[1])
   } else {
     console.error(INVALID_INPUT)
   }
