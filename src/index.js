@@ -14,6 +14,7 @@ import { move } from './utils/fs/move.js';
 import { remove } from './utils/fs/delete.js';
 import { getEOL } from './utils/os/eol.js';
 import { getCpusInfo } from './utils/os/cpus.js';
+import { getSystemUsername } from './utils/os/systemUsername.js';
 
 const rl = readline.createInterface(process.stdin, process.stdout)
 
@@ -60,6 +61,8 @@ async function execCommand(command) {
     await getCpusInfo()
   } else if(command === commands.os.homedir) {
     await logHomeDir()
+  } else if(command === commands.os.username) {
+    await getSystemUsername()
   } else {
     console.error(INVALID_INPUT)
   }
