@@ -4,7 +4,7 @@ import { getUsername } from './utils/base/getUsername.js';
 import { greetings } from './utils/base/greetings.js';
 import { farewell } from './utils/base/farewell.js';
 import { getCurrentPath } from './utils/base/getCurrentPath.js';
-import { logHomeDir } from './utils/base/logHomeDir.js';
+import { logHomeDir } from './utils/os/homedir.js';
 import { INVALID_INPUT, PROMPT_MESSAGE } from './constants/base.js';
 import { read } from './utils/fs/read.js';
 import { create } from './utils/fs/create.js';
@@ -58,12 +58,14 @@ async function execCommand(command) {
     await getEOL()
   } else if(command === commands.os.cpus) {
     await getCpusInfo()
+  } else if(command === commands.os.homedir) {
+    await logHomeDir()
   } else {
     console.error(INVALID_INPUT)
   }
 }
 
 function showPromt() {
-  console.log(`\nYou are currently in ${getCurrentPath(import.meta.url)}\n`)
+  console.log(`\nYou are currently in ${getCurrentPath(import.meta.url)}`)
   rl.prompt()
 }
