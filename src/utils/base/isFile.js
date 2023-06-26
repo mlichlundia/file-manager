@@ -1,13 +1,19 @@
-import { statSync } from 'node:fs';
+import { stat } from 'node:fs/promises';
 import { INVALID_INPUT } from '../../constants/base.js';
 
-export function isFile(path) {
-  const stat = statSync(path, () => {
-      console.error(INVALID_INPUT)
-  })
+export async function isFile(path) {
+  let statFile
+  
+  try {
+    statFile = await stat(path, () => {
+      console.error(INVALID_INPUT, 1)
+  })} catch (err) {
+    console.error(INVALID_INPUT, 2)
+    return false
+  }
 
-  if(!stat.isFile()) {
-      console.error(INVALID_INPUT)
+  if(!statFile?.isFile()) {
+      console.error(INVALID_INPUT, 3)
       return false
   }
 
