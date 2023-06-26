@@ -9,6 +9,7 @@ import { INVALID_INPUT, PROMPT_MESSAGE } from './constants/base.js';
 import { read } from './utils/fs/read.js';
 import { create } from './utils/fs/create.js';
 import { rename } from './utils/fs/rename.js';
+import { copy } from './utils/fs/copy.js';
 
 const rl = readline.createInterface(process.stdin, process.stdout)
 
@@ -43,6 +44,8 @@ async function execCommand(command) {
     await create(getCurrentPath(import.meta.url), params[0])
   } else if(command.startsWith(commands.fs.rename)) {
     await rename(getCurrentPath(import.meta.url), params[0], params[1])
+  } else if(command.startsWith(commands.fs.copy)) {
+    await copy(getCurrentPath(import.meta.url), params[0], params[1])
   } else {
     console.error(INVALID_INPUT)
   }
