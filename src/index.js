@@ -21,6 +21,7 @@ import { compress } from './utils/zip/compress.js';
 import { decompress } from './utils/zip/decompress.js';
 import { goUp } from './utils/navigation/up.js';
 import { goToPath } from './utils/navigation/cd.js';
+import { listDir } from './utils/navigation/ls.js';
 
 const rl = readline.createInterface(process.stdin, process.stdout)
 
@@ -81,6 +82,8 @@ async function execCommand(command) {
     await goUp()
   } else if(command.startsWith(commands.navigation.cd)) {
     await goToPath(cwd(), params[0])
+  } else if(command === commands.navigation.ls) {
+    await listDir()
   } else {
     console.error(INVALID_INPUT)
   }
