@@ -6,14 +6,14 @@ export async function isFile(path) {
   
   try {
     statFile = await stat(path, () => {
-      console.error(INVALID_INPUT, 1)
+      console.error(INVALID_INPUT)
   })} catch (err) {
-    console.error(INVALID_INPUT, 2)
+    console.error(INVALID_INPUT)
     return false
   }
 
   if(!statFile?.isFile()) {
-      console.error(INVALID_INPUT, 3)
+      console.error(INVALID_INPUT)
       return false
   }
 
