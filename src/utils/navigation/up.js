@@ -1,3 +1,3 @@
-export function goUp() {
-  process.chdir('')
+export async function goUp() {
+  process.chdir('../')
 }

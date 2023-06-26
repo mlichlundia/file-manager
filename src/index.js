@@ -1,9 +1,9 @@
-import readline from 'node:readline/promises'
+import readline from 'node:readline/promises';
+import { cwd } from 'process';
 import { commands } from './constants/commands.js';
 import { getUsername } from './utils/base/getUsername.js';
 import { greetings } from './utils/base/greetings.js';
 import { farewell } from './utils/base/farewell.js';
-import { getCurrentPath } from './utils/base/getCurrentPath.js';
 import { logHomeDir } from './utils/os/homedir.js';
 import { INVALID_INPUT, PROMPT_MESSAGE } from './constants/base.js';
 import { read } from './utils/fs/read.js';
@@ -19,6 +19,7 @@ import { getOSArch } from './utils/os/arch.js';
 import { calculateHash } from './utils/hash/hash.js';
 import { compress } from './utils/zip/compress.js';
 import { decompress } from './utils/zip/decompress.js';
+import { goUp } from './utils/navigation/up.js';
 
 const rl = readline.createInterface(process.stdin, process.stdout)
 
@@ -48,17 +49,17 @@ async function execCommand(command) {
   const params = command.split(' ').slice(1, )
 
   if(command.startsWith(commands.fs.read)) {
-    await read(getCurrentPath(import.meta.url), params[0])
+    await read(cwd(), params[0])
   } else if(command.startsWith(commands.fs.create)) {
-    await create(getCurrentPath(import.meta.url), params[0])
+    await create(cwd(), params[0])
   } else if(command.startsWith(commands.fs.rename)) {
-    await rename(getCurrentPath(import.meta.url), params[0], params[1])
+    await rename(cwd(), params[0], params[1])
   } else if(command.startsWith(commands.fs.copy)) {
-    await copy(getCurrentPath(import.meta.url), params[0], params[1])
+    await copy(cwd(), params[0], params[1])
   } else if(command.startsWith(commands.fs.move)) {
-    await move(getCurrentPath(import.meta.url), params[0], params[1])
+    await move(cwd(), params[0], params[1])
   } else if(command.startsWith(commands.fs.delete)) {
-    await remove(getCurrentPath(import.meta.url), params[0])
+    await remove(cwd(), params[0])
   } else if(command === commands.os.eol) {
     await getEOL()
   } else if(command === commands.os.cpus) {
@@ -70,17 +71,19 @@ async function execCommand(command) {
   } else if(command === commands.os.architecture) {
     await getOSArch()
   } else if(command.startsWith(commands.hash)) {
-    await calculateHash(getCurrentPath(import.meta.url), params[0])
+    await calculateHash(cwd(), params[0])
   } else if(command.startsWith(commands.zip.compress)) {
-    await compress(getCurrentPath(import.meta.url), params[0], params[1])
+    await compress(cwd(), params[0], params[1])
   } else if(command.startsWith(commands.zip.decompress)) {
-    await decompress(getCurrentPath(import.meta.url), params[0], params[1])
+    await decompress(cwd(), params[0], params[1])
+  } else if(command === commands.navigation.up) {
+    await goUp()
   } else {
     console.error(INVALID_INPUT)
   }
 }
 
 function showPromt() {
-  console.log(`\nYou are currently in ${getCurrentPath(import.meta.url)}`)
+  console.log(`\nYou are currently in ${process.cwd()}`)
   rl.prompt()
 }
