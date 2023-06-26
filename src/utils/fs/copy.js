@@ -27,7 +27,10 @@ const copy = async (currentDir, file, target) => {
     const readStream = createReadStream(path)
     const writeStream = createWriteStream(targetPath + createFileCopyName(file))
 
-    readStream.pipe(writeStream).on('error', () => console.error(OPERATION_FAILD))
+    readStream.pipe(writeStream).on('error', () => {
+        console.error(OPERATION_FAILD)
+        readStream.close()
+    })
 
     await new Promise((resolve) => readStream.on('close', () => resolve()))
 };
