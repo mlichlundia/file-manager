@@ -1,4 +1,4 @@
-import { resolve } from 'path';
+import { resolve, dirname } from 'path';
 import { rename as fsRename } from 'node:fs/promises';
 import { INVALID_INPUT, OPERATION_FAILD } from '../../constants/base.js';
 
@@ -9,7 +9,7 @@ const rename = async (currentDir, oldName, newName) => {
     }
 
     const targetPath = resolve(currentDir, oldName)
-    const replacePath = resolve(currentDir, newName)
+    const replacePath = resolve(dirname(targetPath), newName)
 
     try {
         await fsRename(targetPath, replacePath)
